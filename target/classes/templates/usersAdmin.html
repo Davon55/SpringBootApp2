@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head> 
+</head>
+
+<body>
+	<div layout:fragment="content" class="container-xl">
+		<h1 th:text="${title}"></h1> 
+		<h2 th:text="${searchModel.searchTerm}"></h2>
+			<table class="table table-striped">
+				<tr class="table-primary">
+				    <th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>User Name</th>
+					<th>Password</th>
+					<th>Email</th>
+					<th>Delete</th>
+					<th>Edit</th>
+					
+				</tr>
+				<tr th:each="user : ${users}">
+				<td th:text="${user.Id}"></td>
+					<td th:text="${user.firstname}"></td>
+					<td th:text="${user.lastname}"></td>
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.password}"></td>
+					<td th:text="${user.Email}"></td>
+					<td>
+					<form action="#" th:action="@{/users/delete/}" th:object="${user}" method="post"> 
+					<input name="Id" type="hidden" th:value="${user.Id}">
+					 <input name="firstName"type="hidden" th:value="${user.firstname}">
+					 <input name="lastName"type="hidden" th:value="${user.lastname}">
+					<input name="username" type="hidden" th:value="${user.username}">
+					<input name="password" type="hidden"  th:value="${user.password}">
+					<input name="Email" type="hidden"  th:value="${user.Email}">
+						<button class="btn btn-danger" type="submit" name="deleteItem">Delete</button>
+					</form>
+					</td>
+						<td>
+					<form action="#" th:action="@{/users/editForm/}" th:object="${user}" method="post"> 
+					<input name="Id" type="hidden" th:value="${user.Id}">
+					 <input name="firstName"type="hidden" th:value="${user.firstname}">
+					 <input name="lastName"type="hidden" th:value="${user.lastname}">
+					<input name="username" type="hidden" th:value="${user.username}">
+					<input name="password" type="hidden"  th:value="${user.password}">
+					<input name="Email" type="hidden"  th:value="${user.Email}">
+						<button class="btn btn-secondary" type="submit" name="deleteItem">Edit</button>
+					</form>
+					</td>
+				</tr> 
+			</table>
+	</div>
+	</body>
+</html>
